@@ -1,26 +1,23 @@
-# EECS 489: Computer Networks (F’19)
+# EECS 489: Computer Networks (F’20)
 
 ## Administrivia
- - Catalog Number: 29083
- - Lectures: 1109 FXB, MW: 4:00 PM – 5:30 PM
- - Discussion 1: 2150 DOW, F 9:30 AM – 10:30 AM
- - Discussion 2: 1014 DOW, Th 5:00 PM – 6:00 PM
- - Discussion 3: 1014 DOW, F 12:30 PM – 1:30 PM
+ - Catalog Number: 28220
+ - Lectures: Live Online, MW: 3:30 PM – 5:00 PM
+ - Discussion 1: Live Online, F 9:30 AM – 10:30 AM
+ - Discussion 2: Live Online, Th 6:00 PM – 7:00 PM
+ - Discussion 3: Live Online, F 12:30 PM – 1:30 PM
 
 ### Team
 
 | Member (uniqname) | Role | Office Hours |
 | :---------------- | :--- | :----------- |
-| [Mosharaf Chowdhury](http://www.mosharaf.com/) (mosharaf) | Faculty | 4820 BBB, W: 2:00 PM - 4:00 PM and by appt.
-| Leonard Lin (yklin) | GSI | 4917 BBB, F: 10:30 AM - 12:30 PM |
-| Joseph Buiteweg (joebb) | GSI | 1637 BBB, Tu: 11:00 AM - 1:00 PM |
+| [Mosharaf Chowdhury](http://www.mosharaf.com/) (mosharaf) | Faculty | [W: 2:00 PM - 3:15 PM](https://officehours.it.umich.edu/queue/421) and by appt.
+| Jie You | GSI | [T: 9:30 AM - 11:30 AM](https://officehours.it.umich.edu/queue/518)
+| Joseph Buiteweg | GSI | [W: 12:00 PM - 2:00 PM](https://officehours.it.umich.edu/queue/510)
 
 ### Piazza
-All communication regarding this course must be via [Piazza](https://piazza.com/umich/fall2019/eecs489/). 
+All communication regarding this course must be via [Piazza](https://piazza.com/umich/fall2020/eecs489). 
 This includes questions, discussions, announcements, as well as private messages.
-
-## Lecture Recordings
-Available at [https://caen.engin.umich.edu/lecrecording/students/](https://caen.engin.umich.edu/lecrecording/students/).
 
 ## Course Description
 EECS 489 takes a top-down approach to explore how networks operate and how network applications are written. 
@@ -36,9 +33,11 @@ We write code to implement various protocols, to build client-server application
 
 ### Prerequisite
 
-The working prerequisite for this course is EECS 281 (Data Structures and Algorithms) even though officially it is EECS 482 (Operating Systems). 
+The enforced prerequisite for this course is EECS 281 (Data Structures and Algorithms) and EECS 370 (Introduction to Computer Organization) even though officially it is EECS 482 (Operating Systems). 
 The current curriculum of this course does not assume or require any prior knowledge of EECS 482.
 Nonetheless, you must have a good working knowledge of C/C++ and Unix family of operating systems.
+
+If needed, you can get an override by signing up [here](https://forms.gle/vaW6x4UsbjFvT6WP7).
 
 ### Optional Textbook
 
@@ -48,22 +47,22 @@ Nonetheless, you must have a good working knowledge of C/C++ and Unix family of 
 
 | Week of  | Monday | Wednesday | Optional Readings | Assignments
 |:---------|:------:|:---------:|:------------------|:----------:
-| 09/02/19 | **No Class** | [Introduction](Slides/090419.pptx) | 
-| 09/09/19 | [Overview](Slides/090919.pptx) | [Protocol Layering](Slides/091119.pptx) | 1.1, 1.3, 1.4, 1.5 | A1 Out
-| 09/16/19 | [HTTP and the Web](Slides/091619.pptx) | [DNS and CDN](Slides/091819.pptx) | 2.2, 2.4
-| 09/23/19 | [Video Streaming and Cloud Systems](Slides/092319.pptx) | [Transport Layer](Slides/092519.pptx) | 2.6, 3.1, 3.2, 3.3, 3.4 | A1 Due
-| 09/30/19 | [TCP Basics](Slides/093019.pptx) | [Flow and Congestion Control](Slides/100219.pptx) | 3.5, 3.6 | A2 Out
-| 10/07/19 | [More Congestion Control](Slides/100719.pptx) | [Network Layer and IP](Slides/100919.pptx) | 3.7, 4.1, 4.3.1, 4.3.2, 4.3.5
-| 10/14/19 | **No Class** | [Midterm Review](Slides/101619.pptx) | 
-| 10/21/19 | **MIDTERM <br> MONDAY 10/21/19 <br> 6 PM - 8 PM** | [IP Routers](Slides/102319.pptx) | 4.2 | A2 Due<br>A3 Out
-| 10/28/19 | [Routing Fundamentals](Slides/102819.pptx) | [Routing Algorithms](Slides/103019.pptx) | 5.1, 5.2, 5.3 | 
-| 11/04/19 | [IP Addressing and Inter-AS Routing](Slides/110419.pptx) | [BGP](Slides/110619.pptx) | 4.3.3, 5.4
-| 11/11/19 | **No Class** | [SDN](Slides/111319.pptx) | 4.4, 5.5 | A3 Due
-| 11/18/19 | [Link Layer](Slides/111819.pptx) | [Switched LAN](Slides/112019.pptx) | 6.1, 6.3, 6.4 | A4 Out
-| 11/25/19 | [Datacenter Networks](Slides/112519.pptx) | **No Class** | 6.6
-| 12/02/19 | [Networking in Datacenters](Slides/120219.pptx) | [Wireless](Slides/120419.pptx) | 6.6, 7.1, 7.2, 7.3
-| 12/09/19 | [Final Review](Slides/120919.pptx) | **No Class** | | A4 Due
-| 12/16/19 | **FINAL <br> THURSDAY 12/19/19 <br> 1:30 PM - 3:30 PM <br> FXB 1008 (Last name A to G) <br> FXB 1012 (Last name H to L) <br> FXB 1109 (The rest)** | | | 
+| 08/31/20 | [Introduction and Overview](Slides/083120.pptx) | [Protocol Layering](Slides/090220.pptx) | 1.1, 1.3, 1.4, 1.5 | A1 Out
+| 09/07/20 | **No Class** | [HTTP and the Web](Slides/090920.pptx) | 2.2 |
+| 09/14/20 | [DNS and CDN](Slides/091420.pptx) | [Video Streaming and Cloud Systems](Slides/091620.pptx) | 2.4, 2.6
+| 09/21/20 | [*Review 1*](Slides/092120.pptx) | [Transport Layer](Slides/092320.pptx) | 3.1, 3.2, 3.3, 3.4 | A1 Due<br>A2 Out
+| 09/28/20 | [TCP Basics](Slides/092820.pptx) | [Flow and Congestion Control](Slides/093020.pptx) | 3.5, 3.6 | 
+| 10/05/20 | [More Congestion Control](Slides/100520.pptx) | [Network Layer and IP](Slides/100720.pptx) | 3.7, 4.1, 4.3.1, 4.3.2, 4.3.5
+| 10/12/20 | [IP Routers](Slides/101220.pptx) | [*Review 2*](Slides/101420.pptx) | 4.2
+| 10/19/20 | **MIDTERM (90 Min) <br> 3:30PM EDT <br> and <br> 11:30PM EDT** <br> [Sign up](https://forms.gle/deP3Z6fENaLHJLrH9) | **No Class** |  | A2 Due<br>A3 Out
+| 10/26/20 | [Routing Fundamentals](Slides/102620.pptx) | [Intra-AS Routing](Slides/102820.pptx) | 5.1, 5.2, 5.3 | 
+| 11/02/20 | [IP Addressing and Inter-AS Routing](Slides/110220.pptx) | [BGP](Slides/110420.pptx) | 4.3.3, 5.4
+| 11/09/20 | [Software-Defined Networking](Slides/110920.pptx) | [*Review 3*](Slides/111120.pptx) | 4.4, 5.5 | A3 Due<br>A4 Out
+| 11/16/20 | [Link Layer](Slides/111620.pptx) | [Switched LAN](Slides/111820.pptx) | 6.1, 6.3, 6.4 | 
+| 11/23/20 | **No Class** | **No Class** | 
+| 11/30/20 | [Wireless Networking](Slides/113020.pptx) | [Datacenter Networking](Slides/120220.pptx) | 6.6, 7.1, 7.2, 7.3
+| 12/07/20 | [*Review 4*](Slides/120720.pptx) | **No Class** | | A4 Due
+| 12/14/20 | **FINAL (90 Min) <br> Wednesday 12/16/20 <br> 8AM EDT and 11AM EDT** <br> [Sign up](https://forms.gle/znKWqTvyjjnnVbws6) | | | 
 
 ## Policies
 
@@ -84,9 +83,25 @@ Outside commitments are not considered a valid reason for missing an exam.
 You are expected to attend lecture regularly and to be at your discussion section weekly. 
 Discussion section meetings will typically involve active participation by discussion, group exercises, or question-and-answer sessions.
 
+### Commitment to Equal Opportunity 
+As indicated in the [General Standards of Conduct for Engineering Students](https://bulletin.engin.umich.edu/rules/#generalstandardsofconductforengineeringstudents), we are committed to a policy of equal opportunity. 
+We ask that all students treat each other with respect. 
+Please feel free to contact us with any problems, concerns, or suggestions.
+
+### Lecture Recordings
+
+Course lectures may be audio/video recorded and made available to other students in this course. As part of your participation in this course, you may be recorded. If you do not wish to be recorded, please contact `eecs489-staff` the first week of class to discuss alternative arrangements.
+
+Students may not record or distribute any class activity without written permission from the instructor, except as necessary as part of approved accommodations for students with disabilities. Any approved recordings may only be used for the student’s own private use.
+
+### Quizzes
+Each lecture has an associated quiz (available via canvas) that is made available sometime after the lecture and will be available for at least 48 hours. 
+
+Quizzes are not graded for correctness; they are for self-evaluating your understanding of the material. 
+However, completing each quiz will result in 0.1% bonus grade after the total grade has been calculated at the end of the semester (for a maximum of 2% bonus grade over 20 quizzes).
+
 ## Grading
 Final grades will be based on the total points earned on the assignments and exams. 
-You must average a passing grade on the exams to receive a passing grade for the class. 
 Factors such as class participation may be used to adjust your final grade, especially if it falls on a borderline. 
 The tentative point breakdown is:
 
@@ -97,4 +112,6 @@ The tentative point breakdown is:
 | Assignment 3 | 15%        
 | Assignment 4 | 15%        
 | Midterm Exam | 25%        
-| Final Exam   | 25%        
+| Final Exam   | 25%
+| **Total**    |100%
+| Quiz (Bonus) |  2%  

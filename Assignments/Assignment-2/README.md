@@ -1,6 +1,6 @@
 # Assignment 2: Video Streaming via CDN
 
-### Due: October 26th, 2019 at 11:59 PM
+### Due: October 22th, 2020 at 11:59 PM
 
 ## Table of contents
 * [Overview](#overview)
@@ -15,6 +15,8 @@
 ## Overview
 
 Video traffic dominates the Internet. In this project, you will explore how video content distribution networks (CDNs) work. In particular, you will implement adaptive bitrate selection, DNS load balancing, and an HTTP proxy server to stream video at high bit rates from the closest server to a given client.
+
+This project is divided into Part 1 and Part 2. We recommend that you work on them simultaneously (both of them can be independently tested), and finally integrate both parts together.
 
 <img src="real-CDN.png" title="Video CDN in the wild" alt="" width="350" height="256"/>
 
@@ -34,7 +36,7 @@ You'll write the gray-shaded components in the figure above.
 
 **Browser.** You'll use an off-the-shelf web browser (Firefox) to play videos served by your CDN (via your proxy).
 
-**Proxy.** Rather than modify the video player itself, you will implement adaptive bitrate selection in an HTTP proxy. The player requests chunks with standard HTTP GET requests; your proxy will intercept these and modify them to retrieve whichever bitrate your algorithm deems appropriate. To simulate multiple clients, you will launch multiple instances of your proxy.
+**Proxy.** Rather than modify the video player itself, you will implement adaptive bitrate selection in an HTTP proxy. The player requests chunks with standard HTTP GET requests; your proxy will intercept these and modify them to retrieve whichever bitrate your algorithm deems appropriate.
 
 **Web Server.** Video content will be served from an off-the-shelf web server (Apache). As with the proxy, you will run multiple instances of Apache on different IP addresses to simulate a CDN with several content servers.
 
@@ -57,6 +59,8 @@ After completing this programming assignment, students should be able to:
 
 * For the proxy you implement in part 1, you will need to parse some HTTP traffic. To make your life easier for this project, you don't need to be concerned about parsing all the information in these HTTP messages. There are only two things that you need to care about searching for: "\r\n\r\n" and "Content-Length:". The former is used to denote the end of an HTTP header, and the latter is used to signify the size of the HTTP body in bytes.
 
+* The proxy should be able to support multiple browsers playing videos simultaneously. This means you should test with multiple browsers all connecting to the same proxy. In addition you should also test with multiple proxies each serve some number of browser(s), in order to make sure that each proxy instance does not interfere with others. 
+
 * While testing the proxy you implement in part 1, you may notice that one browser may sometimes open multiple connections to your proxy server. Your proxy should still continue to function as expected in this case. In order to account for these multiple connections, you may use the browser IP address to uniquely identify each connection (this implies that while testing your proxy server, each browser will have a unique IP address. For example, only one browser will have an IP address of 10.0.0.2).
 
 * Throughput should be measured on each fragment. For example, throughput should be calculated separately for both Seg1-Frag1 and Seg1-Frag2.
@@ -64,13 +68,21 @@ After completing this programming assignment, students should be able to:
 <a name="environment"></a>
 
 ## Environment Setup
-[We are providing a VM](https://drive.google.com/open?id=1-2Ph1fv0VGGabL79_iEVuDwQGUpoGfKQ) that has all the components you need to get started on the assignment. While we tried to make the base VM work for all the projects, unfortunately this didn't come to fruition. Starting fresh also ensures a working environment free from accidental changes that may have been made in the first project.
+[We are providing a VM](https://umich.box.com/s/76dketwoiu1hglxuhte8vwrxc3ai471d) that has all the components you need to get started on the assignment. While we tried to make the base VM work for all the projects, unfortunately this didn't come to fruition. Starting fresh also ensures a working environment free from accidental changes that may have been made in the first project.
 
-This VM includes mininet, Apache, and all the files we will be streaming in this project. Both the username and password for this VM are `proj2`. To start the Apache server, simply run the python script we provide by doing the following:
+You may install tools that suit your workflow. **But DO NOT update the software in the VM.** 
+You can find a guide on [how to troubleshoot the VM here](https://eecs388.org/vmguide.html#troubleshooting).
+
+This VM includes mininet, Apache, and all the files we will be streaming in this project. Both the username and password for this VM are `eecs489vm`. To start the Apache server, simply run the python script we provide by doing the following:
 
 `python start_server.py <host_number>`
 
 Here `<host_number>` is a required command line argument that specifies what host you are running on Mininet. This is important as if you're running on h1 in Mininet (which is given the IP address 10.0.0.1), passing in `1` into the `<host_number>` argument will help ensure that the Apache server instance will be bound to the 10.0.0.1 IP address. The `<host_number>` argument must be between 1 and 8.
+
+The Apache servers would not automatically stop after mininet is closed. You MUST manually stop the server. To stop the Apache server, run:
+
+`sudo killall httpd`
+
 
 Like any HTTP web server (not HTTPS) these instances of Apache will be reachable on TCP port `80`. For simplicity, all of our web traffic for this assignment will be unencrypted and be done over HTTP.
 
@@ -105,13 +117,13 @@ You are to implement a simple HTTP proxy, `miProxy`. It accepts connections from
 
 The picture above shows `miProxy` connected to multiple web servers, which would be the case if `miProxy` issued a DNS request for each new client connection received (e.g each new connection from an instance of Firefox). This is one approach for utilizing the DNS `nameserver` you will write in part 2. Another approach would be to issue a DNS request **once** when `miProxy` starts up, and direct all client requests to one web server for the entire runtime of `miProxy`. Either approach is acceptable for grading purposes, but the former is preferred because it provides more efficient load balancing. The former approach is also closer to the behavior of an actual load balancing proxy.
 
-You might find the `select()` [demo covered in discussion](https://github.com/mosharaf/eecs489/tree/master/Discussion/select_example) helpful. Slides describing this code located [here](https://drive.google.com/open?id=1npIcsFoVRiq0SUFHQzqiRblqWYKs1ked2kDHIP-qPcg). You are also welcome to use other methods of concurrency (i.e threads), but `select()` is our preferred method for this project.
+You might find the `select()` [demo covered in discussion](https://github.com/mosharaf/eecs489/tree/f20/Discussion/select_example) helpful. Slides describing this code located [here](https://github.com/mosharaf/eecs489/blob/f20/Discussion/Discussion3.pdf). You are also welcome to use other methods of concurrency (i.e threads), but `select()` is our preferred method for this project.
 
-*Note: A good resource for socket programming is [Beej's Guide to Network Programming Using Internet Sockets](https://www.beej.us/guide/bgnet/html/single/bgnet.html).*
+*Note: A good resource for socket programming is [Beej's Guide to Network Programming Using Internet Sockets](https://beej.us/guide/bgnet/html/).*
 
 ### Throughput Calculation
 
-Your proxy should estimate each stream's throughput once per chunk. Note the start time of each chunk request when your proxy receives a request from the player and save another timestamp when you have finished receiving the chunk from the server. Given the size of the chunk, you can now compute the throughput by dividing chunk size by time window.
+Your proxy measure the the throughput between the server and ifself to determine the bitrate. Your proxy should estimate each stream's throughput once per chunk. Note the start time of each chunk when your proxy started receiving the chunk from the server and save another timestamp when you have finished receiving the chunk from the server. Given the size of the chunk, you can now compute the throughput by dividing chunk size by time window.
 
 Each video is a sequence of chunks. To smooth your throughput estimation, you should use an exponentially-weighted moving average (EWMA). Every time you make a new measurement (as outlined above), update your current throughput estimate as follows:
 
@@ -172,7 +184,7 @@ In this mode of operation your proxy should obtain the web server's IP address b
 *Also note: we are using our own implementation of DNS on top of TCP, not UDP, meaning `dns-port` **isn't necessarily** 53 (default DNS UDP port). See part 2 for details*.
 
 ### miProxy Logging
-`miProxy` must create a log of its activity in a very particular format. If the log specified by the user shares the same name and path, `miProxy` overwrites the log. *After each request*, it should append the following line to the log:
+`miProxy` must create a log of its activity in a very particular format. If the log specified by the user shares the same name and path, `miProxy` overwrites the log. *After each chunk-file response from the web server*, it should append the following line to the log:
 
 `<browser-ip> <chunkname> <server-ip> <duration> <tput> <avg-tput> <bitrate>`
 
@@ -191,9 +203,12 @@ To play a video through your proxy, you launch an instance of the Apache server,
 <a name="part2"></a>
 ## Part 2: DNS Load Balancing
 
-To spread the load of serving videos among a group of servers, most CDNs perform some kind of load balancing. A common technique is to configure the CDN's authoritative DNS server to resolve a single domain name to one out of a set of IP addresses belonging to replicated content servers. The DNS server can use various strategies to spread the load, e.g., round-robin, shortest geographic distance, or current server load (which requires servers to periodically report their statuses to the DNS server).
+To spread the load of serving videos among a group of servers, most CDNs perform some kind of load balancing. A common technique is to configure the CDN's authoritative DNS server to resolve a single domain name to one out of a set of IP addresses belonging to replicated content servers. The DNS server can use various strategies to spread the load, e.g., round-robin, shortest geographic distance, or current server load (which requires servers to periodically report their statuses to the DNS server). 
 
-You will write a simple DNS server that implements load balancing in two different ways: round-robin and geographic distance. In order for your proxy to be able to query your DNS server, you must also write an accompanying DNS resolution library. The two pieces should communicate using the DNS classes we provide (`DNSHeader.h`, `DNSQuestion.h`, and `DNSRecord.h`). You can read more about what each of the fields in these classes represents [here](http://www.freesoft.org/CIE/RFC/1035/39.htm). To make your life easier:
+In this part, you will write a simple DNS server that implements load balancing in two different ways: round-robin and geographic distance. 
+
+### Message Format for Our DNS Implemetation
+In order for your proxy to be able to query your DNS server, you must also write an accompanying DNS resolution library. The two pieces should communicate using the DNS classes we provide (`DNSHeader.h`, `DNSQuestion.h`, and `DNSRecord.h`). You can read more about what each of the fields in these classes represents [here](http://www.freesoft.org/CIE/RFC/1035/39.htm). To make your life easier:
 
 * `AA` Set this to 0 in requests, 1 in responses.
 
@@ -217,7 +232,19 @@ You will write a simple DNS server that implements load balancing in two differe
 
 * `TTL` Set this to 0 in all responses (no caching).
 
-We are also providing encoding and decoding functions to serialize and deserialize your DNS query and records. Be sure to use the functions we provide so that your DNS server can be properly tested by autograder.
+We are also providing encoding and decoding functions to serialize and deserialize your DNS query and response. Be sure to use the functions we provide so that your DNS server can be properly tested by autograder. In our implementation of DNS, the query consists of DNS header and question, and the response consists of DNS header and record.
+
+**There are some slight nuances in the format of our DNS messages**. The main difference between what we do and what the RFC specifies is that the response should contain header + question + record, whereas our response is only header + record. Also, the size of each object (represented as a 4-byte integer) is sent before sending the contents of the object. The overall procedure is outlined below
+
+1. `miProxy` sends integer designating the size of DNS header -> `miProxy` sends DNS header via encode() -> `miProxy` sends integer designating the size of DNS Question -> `miProxy` sends DNS Question via encode()
+
+2. `nameserver` recvs() integer designating size of DNS Header -> `nameserver` recvs() DNS header via decode() -> `nameserver` recvs() integer designating size of DNS Question -> `nameserver` recvs() DNS Question via decode()
+
+3. `nameserver` sends integer designating size of DNS Header -> `nameserver` sends DNS Header via encode() -> `nameserver` sends integer designating size of DNS Record -> `nameserver` sends DNS Record via encode()
+
+4. `miProxy` recvs() integer designating size of DNS Header -> `miProxy` recvs() DNS header via decode() -> `miProxy` recvs() integer designating size of DNS Record -> `miProxy` recvs() DNS Record via decode()
+
+**Remember to use `htonl` and `ntohl` when sending/receiving integers over the network!**
 
 ### Round-Robin Load Balancer
 One of the ways you will implement `nameserver` is as a simple round-robin based DNS load balancer. It should take as input a list of video server IP addresses on the command line; it responds to each request to resolve the name `video.cse.umich.edu` by returning the next IP address in the list, cycling back to the beginning when the list is exhausted.
@@ -344,13 +371,13 @@ The autograder will be released roughly halfway through the assignment. You are 
 Our autograder runs the following versions of gcc/g++, please make sure your code is compatible.
 ```
 $ gcc --version
-gcc (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0
+gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
 Copyright (C) 2017 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 $ g++ --version
-g++ (Ubuntu 7.4.0-1ubuntu1~18.04.1) 7.4.0
+g++ (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
 Copyright (C) 2017 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.

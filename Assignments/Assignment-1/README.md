@@ -1,6 +1,6 @@
 # Assignment 1: Sockets, Mininet, & Performance
 
-### Due: Sep 28, 2018, 11:59 PM
+### Due: Sep 23, 2020, 11:59 PM
 
 ## Overview
 
@@ -13,7 +13,7 @@
 * [Submission Instructions](#submission-instr)
 * [Autograder](#autograder)
 
-Before you start doing anything with this project, however, please [register your github username with us](https://docs.google.com/forms/d/e/1FAIpQLScOrkw2v-N6AazL8CYUFGzz1o1iSJ6YfFnAO1fVEtxSMYCPqw/viewform?usp=sf_link) if you have not done so already. This is so that we can create a private repository for you to store your code and answers for this project.
+Before you start doing anything with this project, however, please [register your github username with us](https://docs.google.com/forms/d/e/1FAIpQLSdiluFabvfbeHLnv9UDJdDS0mReuCtTlj_FaO2LPDf3RUkXpQ/viewform?usp=sf_link) if you have not done so already. This is so that we can create a private repository for you to store your code and answers for this project.
 
 ## Learning Outcomes
 
@@ -27,7 +27,7 @@ After completing this programming assignment, students should be able to:
 
 For the first part of the assignment you will write your own version of `iPerf` to measure network bandwidth. Your tool, called `iPerfer`, will send and receive TCP packets between a pair of hosts using sockets.
 
-**Note**: A good resource and a starting point to learn about socket programming is this [Sockets Tutorial](http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html). You may also refer to [Beej's Guide to Network Programming Using Internet Sockets](http://beej.us/net2/bgnet.html). Discussion sections will also review the basics of socket programming.
+**Note**: A good resource and a starting point to learn about socket programming is this [Sockets Tutorial](http://www.cs.rpi.edu/~moorthy/Courses/os98/Pgms/socket.html). You may also refer to [Beej's Guide to Network Programming Using Internet Sockets](https://beej.us/guide/bgnet/html/). Discussion sections will also review the basics of socket programming.
 
 When operating in client mode, `iPerfer` will send TCP packets to a specific host for a specified time window and track how much data was sent during that time frame; it will calculate and display the bandwidth based on how much data was sent in the elapsed time. When operating in server mode, `iPerfer` will receive TCP packets and track how much data was received during the lifetime of a connection; it will calculate and display the bandwidth based on how much data was received and how much time elapsed during the connection.
 
@@ -134,7 +134,7 @@ To test `iPerfer`, you will learn how to use Mininet to create virtual networks 
 
 It is best advised to run Mininet in a virtual machine (VM). We will be using [VirtualBox](https://www.virtualbox.org/), which is a free and open-source hypervisor. Please download and install the latest version of VirtualBox.
 
-You will be using our VM image ([link here](https://drive.google.com/open?id=1ix33--G7CagnjbDKgRhpPdYsGwNaZvf1)) with Mininet 2.3 pre-installed. Please download and import the VM image into VirtualBox. To transfer files to/from your VM you can use the Shared Folder feature provided in VirtualBox. We will go over this in more detail in discussion.
+You will be using our VM image ([link here](https://umich.box.com/s/8n7fohnacai615mnbscoaqjtqe67tjvo)) with Mininet 2.3 pre-installed. Please download and import the VM image into VirtualBox. To transfer files to/from your VM you can use the Shared Folder feature provided in VirtualBox. We will go over this in more detail in discussion.
 
 You are welcome to try to set up your own testing environment using the methods outlined in options 2 and 3 [here](http://mininet.org/download/#option-2-native-installation-from-source), however we will only officially be supporting the provided VM above.
 
@@ -203,7 +203,7 @@ Finally, create a visualization of your custom topology (using circles to denote
 
 <a name="submission-instr"></a>
 ## Submission Instructions
-Submission to the autograder will be done [here](https://eecs489.eecs.umich.edu/).
+Submission to the autograder will be done [here](https://eecs489.eecs.umich.edu/). It will be released about halfway through the assignment.
 
 To submit:
 1. `git push` your work to the github repository we provided for the assignment.
@@ -245,6 +245,7 @@ $ tree ./p1-joebb/
     ├── throughput_L4.txt
     ├── throughput_L5.txt
     ├── throughput_Q2.txt
+    ├── throughput_h3-h8.txt
     └── throughput_h1-h10.txt
 ```
 

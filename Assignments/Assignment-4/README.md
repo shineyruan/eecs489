@@ -1,6 +1,6 @@
 # Assignment 4: Designing a Static Router
 
-### Due: Wednesday December 11th at 11:59 PM
+### Due: Wednesday December 9th at 11:59 PM
 
 ## Overview
 
@@ -41,7 +41,7 @@ After completing this programming assignment, students should be able to:
 ## Getting Started
 
 ### Virtual Machine
-Your assignment will run in a local virtual machine. You can obtain the VM from [here](https://drive.google.com/file/d/1w3p6hvMEske9uO9DsM4vfcrf4CyCMGQd/view). The password is the same as the username for this VM.
+Your assignment will run in a local virtual machine. You can obtain the VM from [here](https://drive.google.com/file/d/1w3p6hvMEske9uO9DsM4vfcrf4CyCMGQd/view). The password is the same as the username for this VM. A version compatible with VMWare Fusion can be downloaded [here](https://umich.box.com/s/zinvigje3v43e4agtmbgzt7ami1cyonm)
 
 This VM is different from the ones used for the first three assignments, it contains extra configuration files necessary to complete the project.
 
@@ -107,7 +107,7 @@ This is a high-level overview of the forwarding process. More low-level details 
 You are given a raw Ethernet frame and have to send raw Ethernet frames. You should understand source and destination MAC addresses and the idea that we forward a packet one hop by changing the destination MAC address of the forwarded packet to the MAC address of the next hop's incoming interface.
 
 #### Internet Protocol
-Before operating on an IP packet, you should verify its checksum and make sure it is large enough to hold an IP packet. You should understand how to find the longest prefix match of a destination IP address in the routing table described in the [Getting Started](#getting-started) section. If you determine that a datagram should be forwarded, you should correctly decrement the TTL field of the header and recompute the checksum over the changed header before forwarding it to the next hop.
+Before operating on an IP packet, you should verify its checksum. Packets with checksum mismatch are discarded. You should understand how to find the longest prefix match of a destination IP address in the routing table described in the [Getting Started](#getting-started) section. If you determine that a datagram should be forwarded, you should correctly decrement the TTL field of the header and recompute the checksum over the changed header before forwarding it to the next hop.
 
 #### Internet Control Message Protocol
 ICMP sends control information. In this assignment, your router will use ICMP to send messages back to a sending host. You will need to properly generate the following ICMP messages (including the ICMP header checksum) in response to the sending host under the following conditions:
@@ -127,7 +127,7 @@ To lessen the number of ARP requests sent out, you are required to cache ARP rep
 
 When forwarding a packet to a next-hop IP address, the router should first check the ARP cache for the corresponding MAC address before sending an ARP request. In the case of a cache miss, an ARP request should be sent to a target IP address about once every second until a reply comes in. If the ARP request is sent five times with no reply, an ICMP destination host unreachable is sent back to the source IP as stated above. The provided ARP request queue will help you manage the request queue.
 
-In the case of an ARP request, you should only send an ARP reply if the target IP address is one of your router's IP addresses. In the case of an ARP reply, you should only cache the entry if the target IP address is one of your router's IP addresses.
+In the case of an ARP request, you should only send an ARP reply if the target IP address is one of your router's IP addresses.
 
 Note that ARP requests are sent to the broadcast MAC address (`ff-ff-ff-ff-ff-ff`). ARP replies are sent directly to the requester's MAC address.
 

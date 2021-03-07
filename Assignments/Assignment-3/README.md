@@ -1,6 +1,6 @@
 # Assignment 3: Reliable Transport
 
-### Due: November 16, 2019 at 11:59 PM
+### Due: November 13, 2020 at 11:59 PM
 
 ## Table of contents
 * [Overview](#overview)
@@ -36,7 +36,7 @@ To initiate a connection, `wSender` starts with a `START` message along with a r
 
 The ACK `seqNum` values for `START` and `END` messages should both be set to whatever the `seqNum` values are that were sent by `wSender`.
 
-`wSender` will use **0** as the initial sequence number for data packets in that connection. Furthremore, it sends back cumulative `ACK` packets (described in more details below).
+`wSender` will use **0** as the initial sequence number for data packets in that connection. Furthermore, `wReceiver` sends back cumulative `ACK` packets (described in more details below).
 
 ### Packet Size
 An important limitation is the maximum size of your packets. The UDP protocol has an 8 byte header, and the IP protocol underneath it has a header of 20 bytes. Because we will be using Ethernet networks, which have a maximum frame size of 1500 bytes, this leaves 1472 bytes for your entire `packet` structure (including both the header and the chunk of data).
@@ -156,8 +156,8 @@ The command line parameters passed to these new `wSender` and `wReceiver` are th
 * It is up to you how you choose to read from and write to files, but you may find the `std::ifstream.read()` and `std::ofstream.write()` functions particularly helpful.
 * Please closely follow updates on Piazza. All further clarifications will be posted on Piazza via pinned Instructor Notes. We recommend you follow these notes to receive updates in time.
 * You MUST NOT use TCP sockets.
-* Once we go over it in discussion, links to slides and examples of UDP socket programs will be added here:
-* Another good resource for UDP socket programming is [Beej's Guide to Network Programming Using Internet Sockets](https://beej.us/guide/bgnet/html//index.html).
+* You can find an example of UDP socket programming in the Discussion folder.
+* Another good resource for UDP socket programming is [Beej's Guide to Network Programming Using Internet Sockets](https://beej.us/guide/bgnet/html/index.html).
 
 <a name="submission-instr"></a>
 ## Submission Instructions
@@ -168,7 +168,7 @@ To submit:
 2. Go to autograder website specified above. You can specify what branch on your repository you want us to grade.
 3. Press submit. Your results will show up on that page once grading is finished.
 
-You assigned repository must contain:
+Your assigned repository must contain:
 
 * `Makefile`(s) to compile both executables with one single `make` command
 * The source code for `wSender` and `wReceiver` from parts 1 and 2: all source files should be in a folder called `WTP-base`.
